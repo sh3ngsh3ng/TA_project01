@@ -1,6 +1,8 @@
 tasks:
   - name: Start Web Server
     init: python -m http.server 8000
+  - name: CLI
+    
 ports:
   - port: 8000
-    onOpen: open-preview
+    onOpen: open-browser
