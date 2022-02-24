@@ -1,3 +1,18 @@
+
+
+// plot markers
+function plotMarkers(arr) {
+    // clear layers
+    planeLayer.clearLayers()
+    for (let i = 0; i < arr.length; i++) {
+        let stateVector = arr[i]
+        let latLng = [stateVector[6], stateVector[5]]
+        // add to layer
+        L.marker(latLng, {icon: planeIcon}).addTo(planeClusterLayer)
+    }
+}
+
+
 // API call for state vectors
 async function getStateVectors() {
     let response = await axios.get("https://opensky-network.org/api/states/all", {
@@ -8,8 +23,9 @@ async function getStateVectors() {
             lomax: topRight[1]
         }
     })
-    console.log(response.data)
+    plotMarkers(response.data.states)
 }
+
 
 // global bounds
 let topRight = 0
